@@ -1,0 +1,41 @@
+{
+	"name": "node-math-game",
+	"version": "0.0.1",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "cross-env PUBLIC_BASE_URL=http://localhost:5173 vite dev",
+		"build": "cross-env PUBLIC_BASE_URL=http://localhost:4173 vite build",
+		"preview": "vite preview",
+		"stylelint": "stylelint '**/*.{css,html,scss,svelte}'",
+		"svelte-check": "svelte-check",
+		"format": "biome check --write --unsafe .",
+		"format-check": "biome check ."
+	},
+	"dependencies": {
+		"html-minifier-terser": "^7.2.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.3",
+		"@sveltejs/adapter-vercel": "^5.4.5",
+		"@sveltejs/kit": "^2.7.0",
+		"@sveltejs/vite-plugin-svelte": "^3.1.2",
+		"@types/html-minifier-terser": "^7.0.2",
+		"autoprefixer": "^10.4.20",
+		"cross-env": "^7.0.3",
+		"postcss-preset-env": "^10.0.7",
+		"sass": "^1.79.5",
+		"stylelint": "^16.10.0",
+		"stylelint-config-html": "^1.1.0",
+		"stylelint-config-prettier-scss": "^1.0.0",
+		"stylelint-config-standard": "^36.0.1",
+		"stylelint-config-standard-scss": "^13.1.0",
+		"stylelint-use-nesting": "^6.0.0",
+		"svelte": "^4.2.19",
+		"svelte-check": "^4.0.5",
+		"tslib": "^2.7.0",
+		"typescript": "^5.6.3",
+		"vite": "^5.4.8"
+	},
+	"browserslist": ["defaults", "iOS 12"]
+}
