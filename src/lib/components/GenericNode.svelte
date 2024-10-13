@@ -2,22 +2,29 @@
 import { CATEGORY_COLORS, type NodeType } from "$lib/types";
 
 export let node_type: NodeType<number, number>;
+export let selected = false;
 </script>
 
-<div id="node_container" style:--color={CATEGORY_COLORS[node_type.category]}>
+<div id="node_container" class:selected style:--color={CATEGORY_COLORS[node_type.category]}>
     <h2>{node_type.name}</h2>
     <div id="io">
         {#if node_type.input_names}
             <ol id="inputs">
                 {#each node_type.input_names as input_name}
-                    <li>{input_name}</li>
+                    <li>
+                        <slot name="input_anchor"/>
+                        <span>{input_name}</span>
+                    </li>
                 {/each}
             </ol>
         {/if}
         {#if node_type.output_names}
             <ol id="outputs">
                 {#each node_type.output_names as output_name}
-                    <li>{output_name}</li>
+                    <li>
+                        <slot name="output_anchor"/>
+                        <span>{output_name}</span>
+                    </li>
                 {/each}
             </ol>
         {/if}
@@ -29,9 +36,12 @@ export let node_type: NodeType<number, number>;
     display: inline-block;
     position: relative;
     border: 2px solid var(--color);
-    margin: 1em;
     color: white;
     background-color: black;
+
+    &.selected {
+        outline: 1px dashed cyan;
+    }
 }
 
 h2 {
@@ -39,6 +49,7 @@ h2 {
     box-sizing: border-box;
     text-align: center;
     font-size: 1.3em;
+    font-weight: normal;
     border-bottom: 1px dashed var(--color);
     padding: .2em .5em;
     margin-bottom: .5em;
@@ -65,28 +76,10 @@ li {
 
 #inputs {
     padding-right: .5em;
-
-    & ::before {
-        left: -9px;
-    }
 }
 
 #outputs {
     padding-left: .5em;
     text-align: right;
-
-    & ::after {
-        right: -9px;
-    }
-}
-
-#inputs ::before, #outputs ::after {
-    content: "";
-    width: calc(1em - 2px);
-    height: calc(1em - 2px);
-    position: absolute;
-    background-color: black;
-    border: 2px solid var(--color);
-    border-radius: 50%;
 }
 </style>

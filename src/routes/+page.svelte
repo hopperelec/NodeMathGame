@@ -1,14 +1,10 @@
 <script>
-import Node from "$lib/components/Node.svelte";
-import { createArithmeticNodeType } from "$lib/types";
+import {Svelvet} from 'svelvet';
+import {createArithmeticNodeType} from "$lib/types";
+import PlacedNode from "$lib/components/PlacedNode.svelte";
 </script>
 
-<div>
-    <Node node_type={createArithmeticNodeType("Addition", "+", (op1, op2) => op1+op2)} />
-</div>
-
-<style>
-div {
-    font-family: sans-serif;
-}
-</style>
+<Svelvet minimap controls pannable theme="dark" edgesAboveNode>
+    <PlacedNode node_type={createArithmeticNodeType("Add", "+", (op1, op2) => op1+op2)} />
+    <PlacedNode node_type={createArithmeticNodeType("Subtract", "-", (op1, op2) => op1-op2)} />
+</Svelvet>

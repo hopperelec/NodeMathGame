@@ -13,7 +13,7 @@ export type NodeType<NumInputs extends number, NumOutputs extends number> = {
 	input_names: TFixedLengthArray<null | string, NumInputs>;
 	output_names: TFixedLengthArray<null | string, NumOutputs>;
 	category: keyof typeof CATEGORY_COLORS;
-	implementation: (
+	processor: (
 		inputs: TFixedLengthArray<number, NumInputs>,
 	) => TFixedLengthArray<number, NumOutputs>;
 };
@@ -24,21 +24,21 @@ export function createNumberNodeType(value: number): NodeType<0, 1> {
 		input_names: [],
 		output_names: [null],
 		category: "number",
-		implementation: () => [value],
+		processor: () => [value],
 	};
 }
 
 export function createArithmeticNodeType(
 	name: string,
 	symbol: string,
-	implementation: (operand1: number, operand2: number) => number,
+	processor: (operand1: number, operand2: number) => number,
 ): NodeType<2, 1> {
 	return {
 		name,
 		input_names: ["A", "B"],
 		output_names: [`A${symbol}B`],
 		category: "arithmetic",
-		implementation: (inputs) => [implementation(inputs[0], inputs[1])],
+		processor: (inputs) => [processor(inputs[0], inputs[1])],
 	};
 }
 
