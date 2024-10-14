@@ -1,8 +1,8 @@
 <script lang="ts">
 import GenericNode from "$lib/components/GenericNode.svelte";
-import type {NodeType} from "$lib/types";
+import type { NodeType } from "$lib/types";
 
-export let node_type: NodeType<number, number>;
+export let node_type: NodeType;
 </script>
 
 <GenericNode {node_type}>

@@ -1,7 +1,7 @@
 <script lang="ts">
 import { CATEGORY_COLORS, type NodeType } from "$lib/types";
 
-export let node_type: NodeType<number, number>;
+export let node_type: NodeType;
 export let selected = false;
 </script>
 
@@ -10,20 +10,20 @@ export let selected = false;
     <div id="io">
         {#if node_type.input_names}
             <ol id="inputs">
-                {#each node_type.input_names as input_name}
+                {#each Object.entries(node_type.input_names) as [i,input_name]}
                     <li>
-                        <slot name="input_anchor"/>
-                        <span>{input_name}</span>
+                        <slot name="input_anchor" {i}/>
+                        {#if input_name}<span>{input_name}</span>{/if}
                     </li>
                 {/each}
             </ol>
         {/if}
         {#if node_type.output_names}
             <ol id="outputs">
-                {#each node_type.output_names as output_name}
+                {#each Object.entries(node_type.output_names) as [i,output_name]}
                     <li>
-                        <slot name="output_anchor"/>
-                        <span>{output_name}</span>
+                        <slot name="output_anchor" {i}/>
+                        {#if output_name}<span>{output_name}</span>{/if}
                     </li>
                 {/each}
             </ol>
