@@ -20,7 +20,7 @@ function onConnection(event: CustomEvent) {
 	}
 }
 
-function onDisonnection(event: CustomEvent) {
+function onDisconnection(event: CustomEvent) {
 	const targetNode = nodes[event.detail.targetNode.id.substring(2)];
 	const targetInputId = parseAnchorId(event.detail.targetAnchor);
 	targetNode.inputs[targetInputId] = null;
@@ -28,7 +28,7 @@ function onDisonnection(event: CustomEvent) {
 }
 </script>
 
-<Svelvet minimap controls pannable theme="dark" edgesAboveNode on:connection={onConnection} on:disconnection={onDisonnection}>
+<Svelvet minimap controls pannable theme="dark" edgesAboveNode on:connection={onConnection} on:disconnection={onDisconnection}>
     {#each Object.entries(nodes) as [i, node]}
         <PlacedNodeComponent id={i} node_type={node.type} position={node.position}/>
     {/each}
