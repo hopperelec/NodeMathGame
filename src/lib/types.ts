@@ -8,8 +8,8 @@ export const CATEGORY_COLORS = {
 	function: "#f90",
 };
 
-type ProcessableInputValue = number;
-type ValidOutputValue = ProcessableInputValue | null;
+export type ProcessableInputValue = number;
+export type ValidOutputValue = ProcessableInputValue | null;
 
 type FixedLengthArray<T, L extends number> = [...T[]] & { length: L };
 
@@ -26,16 +26,21 @@ export type NodeType<
 	) => FixedLengthArray<ValidOutputValue, NumOutputs>;
 };
 
+type Inputs<NumInputs extends number> = FixedLengthArray<ValidOutputValue, NumInputs>;
+type Outputs<NumOutputs extends number> = FixedLengthArray<Set<{ node: PlacedNode, inputId: number }>, NumOutputs>;
+
 export type PlacedNode<
 	NumInputs extends number = number,
 	NumOutputs extends number = number,
 > = {
+	id: number,
 	type: NodeType<NumInputs, NumOutputs>;
 	position: { x: number; y: number };
-	inputs: FixedLengthArray<ValidOutputValue, NumInputs>;
-	outputs: FixedLengthArray<ValidOutputValue, NumOutputs>;
+	inputs: Inputs<NumInputs>;
+	outputs: Outputs<NumOutputs>;
 };
 
+let lastNodeId = 1; // For some reason, this can't be 0
 export function createPlacedNode<
 	NumInputs extends number,
 	NumOutputs extends number,
@@ -43,25 +48,15 @@ export function createPlacedNode<
 	type: NodeType<NumInputs, NumOutputs>,
 	position: { x: number; y: number },
 ): PlacedNode<NumInputs, NumOutputs> {
-	const inputs = type.input_names.map(() => null) as FixedLengthArray<
-		ValidOutputValue,
-		NumInputs
-	>;
 	return {
+		id: lastNodeId++,
 		type,
 		position,
-		inputs,
-		outputs:
-			inputs.length === 0
-				? type.processor(
-						[] as unknown as FixedLengthArray<ProcessableInputValue, NumInputs>,
-					)
-				: (type.output_names.map(() => null) as FixedLengthArray<
-						ValidOutputValue,
-						NumOutputs
-					>),
+		inputs: type.input_names.map(() => null) as Inputs<NumInputs>,
+		outputs: type.output_names.map(() => new Set()) as Outputs<NumOutputs>
 	};
 }
+
 
 export function createNumberNodeType(value: number): NodeType<0, 1> {
 	return {

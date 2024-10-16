@@ -1,15 +1,13 @@
 <script lang="ts">
 import GenericNode from "$lib/components/GenericNode.svelte";
-import type { NodeType } from "$lib/types";
+import type {PlacedNode} from "$lib/types";
 import { Anchor, Node } from "svelvet";
 
-export let node_type: NodeType;
-export let position: { x: number; y: number };
-export let id: string;
+export let node: PlacedNode;
 </script>
 
-<Node {id} editable={false} let:selected {position}>
-    <GenericNode {node_type} {selected}>
+<Node id={node.id} position={node.position} editable={false} let:selected>
+    <GenericNode node_type={node.type} {selected}>
         <div id="input-anchor" slot="input_anchor" let:i>
             <Anchor input id={i}>
                 <div></div>
