@@ -7,6 +7,7 @@ import {
 	createNumberNodeType,
 	createPlacedNode,
 } from "$lib/types";
+import Shop from "$lib/components/Shop.svelte";
 
 const nodes = [
 	createPlacedNode(createNumberNodeType(1), { x: 100, y: 100 }),
@@ -18,10 +19,20 @@ const nodes = [
 ];
 </script>
 
-<NodeMap {nodes}/>
-<span>Points: {$POINTS_STORE}</span>
+<div>
+    <NodeMap {nodes}/>
+    <Shop/>
+    <span>Points: {$POINTS_STORE}</span>
+</div>
 
 <style>
+div {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+}
+
 span {
     position: absolute;
     top: 0;
