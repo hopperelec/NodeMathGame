@@ -18,5 +18,15 @@ const nodes = [
 ];
 </script>
 
-<span>Points: {$POINTS_STORE}</span>
 <NodeMap {nodes}/>
+<span>Points: {$POINTS_STORE}</span>
+
+<style>
+span {
+    position: absolute;
+    top: 0;
+    color: white;
+    font-size: 1.5em;
+    padding: .3em;
+}
+</style>
