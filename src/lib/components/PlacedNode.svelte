@@ -9,12 +9,12 @@ export let node: PlacedNode;
 <Node id={node.id} position={node.position} editable={false} let:selected>
     <GenericNode node_type={node.type} {selected}>
         <div id="input-anchor" slot="input_anchor" let:i>
-            <Anchor input id={i}>
+            <Anchor input id={"I"+i}>
                 <div></div>
             </Anchor>
         </div>
         <div id="output-anchor" slot="output_anchor" let:i>
-            <Anchor output id={i}>
+            <Anchor output id={"O"+i}>
                 <div></div>
             </Anchor>
         </div>

@@ -6,11 +6,12 @@ import { Svelvet } from "svelvet";
 export let nodes: PlacedNode[] = [];
 
 function parseAnchorId(anchorId: { id: string }): number {
-	return +anchorId.id.split("/", 1)[0].substring(2);
+	return +anchorId.id.split("/", 1)[0].substring(3);
 }
 
 function parseNode(nodeId: { id: string }): PlacedNode {
-    const node = nodes.find((n) => n.id === +nodeId.id.substring(2));
+    const parsedNodeId = +nodeId.id.substring(2);
+    const node = nodes.find((n) => n.id === parsedNodeId);
     if (node === undefined) throw new Error("Node not found");
     return node;
 }
