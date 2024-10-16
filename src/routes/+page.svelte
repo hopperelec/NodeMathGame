@@ -11,11 +11,12 @@ import Shop from "$lib/components/Shop.svelte";
 
 const nodes = [
 	createPlacedNode(createNumberNodeType(1), { x: 100, y: 100 }),
+    createPlacedNode(createNumberNodeType(1), { x: 100, y: 200 }),
 	createPlacedNode(
 		createArithmeticNodeType("Add", "+", (op1, op2) => op1 + op2),
-		{ x: 300, y: 100 },
+		{ x: 300, y: 130 },
 	),
-	createPlacedNode(SELL_NODE, { x: 500, y: 100 }),
+	createPlacedNode(SELL_NODE, { x: 500, y: 130 }),
 ];
 </script>
 

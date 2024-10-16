@@ -14,7 +14,7 @@ export let node: PlacedNode;
             </Anchor>
         </div>
         <div id="output-anchor" slot="output_anchor" let:i>
-            <Anchor output id={"O"+i}>
+            <Anchor output id={"O"+i} multiple={false}>
                 <div></div>
             </Anchor>
         </div>
