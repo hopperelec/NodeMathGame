@@ -2,6 +2,7 @@
 import PlacedNodeComponent from "$lib/components/PlacedNode.svelte";
 import type { PlacedNode, ValidOutputValue } from "$lib/types";
 import { Svelvet } from "svelvet";
+import CustomEdge from "$lib/components/CustomEdge.svelte";
 
 export let nodes: PlacedNode[] = [];
 
@@ -75,7 +76,7 @@ setInterval(() => {
 }, 1000);
 </script>
 
-<Svelvet minimap controls pannable theme="dark" edgesAboveNode on:connection={onConnection} on:disconnection={onDisconnection}>
+<Svelvet minimap controls pannable theme="dark" edge={CustomEdge} edgesAboveNode on:connection={onConnection} on:disconnection={onDisconnection}>
     {#each nodes as node}
         <PlacedNodeComponent {node}/>
     {/each}
