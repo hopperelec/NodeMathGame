@@ -26,14 +26,20 @@ export type NodeType<
 	) => FixedLengthArray<ValidOutputValue, NumOutputs>;
 };
 
-type Inputs<NumInputs extends number> = FixedLengthArray<ValidOutputValue, NumInputs>;
-type Outputs<NumOutputs extends number> = FixedLengthArray<Set<{ node: PlacedNode, inputId: number }>, NumOutputs>;
+type Inputs<NumInputs extends number> = FixedLengthArray<
+	ValidOutputValue,
+	NumInputs
+>;
+type Outputs<NumOutputs extends number> = FixedLengthArray<
+	Set<{ node: PlacedNode; inputId: number }>,
+	NumOutputs
+>;
 
 export type PlacedNode<
 	NumInputs extends number = number,
 	NumOutputs extends number = number,
 > = {
-	id: number,
+	id: number;
 	type: NodeType<NumInputs, NumOutputs>;
 	position: { x: number; y: number };
 	inputs: Inputs<NumInputs>;
@@ -53,10 +59,9 @@ export function createPlacedNode<
 		type,
 		position,
 		inputs: type.input_names.map(() => null) as Inputs<NumInputs>,
-		outputs: type.output_names.map(() => new Set()) as Outputs<NumOutputs>
+		outputs: type.output_names.map(() => new Set()) as Outputs<NumOutputs>,
 	};
 }
-
 
 export function createNumberNodeType(value: number): NodeType<0, 1> {
 	return {

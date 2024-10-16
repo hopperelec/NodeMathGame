@@ -1,6 +1,6 @@
 <script lang="ts">
 import GenericNode from "$lib/components/GenericNode.svelte";
-import type {PlacedNode} from "$lib/types";
+import type { PlacedNode } from "$lib/types";
 import { Anchor, Node } from "svelvet";
 
 export let node: PlacedNode;

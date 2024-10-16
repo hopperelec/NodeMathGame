@@ -5,7 +5,7 @@ export let node_type: NodeType;
 export let selected = false;
 </script>
 
-<div id="node_container" class:selected style:--color={CATEGORY_COLORS[node_type.category]}>
+<div id="node-container" class:selected style:--color={CATEGORY_COLORS[node_type.category]}>
     <h2>{node_type.name}</h2>
     <div id="io">
         {#if node_type.input_names}
@@ -32,7 +32,7 @@ export let selected = false;
 </div>
 
 <style>
-#node_container {
+#node-container {
     display: inline-block;
     position: relative;
     border: 2px solid var(--color);
