@@ -9,7 +9,8 @@ export let node: PlacedNode;
 <Node id={node.id} position={node.position} editable={false} let:selected>
     <GenericNode node_type={node.type} {selected}>
         <div id="input-anchor" slot="input_anchor" let:i>
-            <Anchor input id={"I"+i}>
+            <!-- Edge label isn't reactive, not sure why -->
+            <Anchor input id={"I"+i} edgeLabel={node.inputs[+i]?.toString()}>
                 <div></div>
             </Anchor>
         </div>

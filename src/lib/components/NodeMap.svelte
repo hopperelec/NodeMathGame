@@ -39,16 +39,16 @@ function setInputValue(
 	const output = node.inputs.every((input) => input !== null)
 		? node.type.processor(node.inputs)
 		: null;
-	for (const [i, targets] of node.outputs.entries()) {
-		for (const target of targets) {
-			setInputValue(target.node, target.inputId, output ? output[i] : null);
-		}
-	}
+    for (const [i, outputAnchor] of node.outputs.entries()) {
+        if (outputAnchor !== null) {
+            setInputValue(outputAnchor.node, outputAnchor.inputId, output ? output[i] : null);
+        }
+    }
 }
 
 function onConnection(event: CustomEvent) {
 	const { source, target } = parseNodeEvent(event);
-	source.node.outputs[source.outputId].add(target);
+    source.node.outputs[source.outputId] = target;
 	if (source.node.inputs.every((input) => input !== null)) {
 		setInputValue(
 			target.node,
@@ -60,7 +60,7 @@ function onConnection(event: CustomEvent) {
 
 function onDisconnection(event: CustomEvent) {
 	const { source, target } = parseNodeEvent(event);
-	source.node.outputs[source.outputId].delete(target);
+	source.node.outputs[source.outputId] = null;
 	setInputValue(target.node, target.inputId, null);
 }
 

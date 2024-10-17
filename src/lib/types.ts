@@ -31,7 +31,7 @@ type Inputs<NumInputs extends number> = FixedLengthArray<
 	NumInputs
 >;
 type Outputs<NumOutputs extends number> = FixedLengthArray<
-	Set<{ node: PlacedNode; inputId: number }>,
+	{node: PlacedNode, inputId: number} | null,
 	NumOutputs
 >;
 
@@ -59,7 +59,7 @@ export function createPlacedNode<
 		type,
 		position,
 		inputs: type.input_names.map(() => null) as Inputs<NumInputs>,
-		outputs: type.output_names.map(() => new Set()) as Outputs<NumOutputs>,
+		outputs: type.output_names.map(() => null) as Outputs<NumOutputs>,
 	};
 }
 
