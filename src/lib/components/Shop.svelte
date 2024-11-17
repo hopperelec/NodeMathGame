@@ -6,9 +6,9 @@ import {createArithmeticNodeType, createNumberNodeType, SELL_NODE} from "$lib/ty
 <div>
     <h2>Shop</h2>
     <ul>
-        <li><ShopNode node_type={createNumberNodeType(1)} cost={10} stored={1}/></li>
-        <li><ShopNode node_type={createArithmeticNodeType("Add", "+", (op1, op2) => op1+op2)} cost={20} stored={1}/></li>
         <li><ShopNode node_type={SELL_NODE} cost={20} stored={1}/></li>
+        <li><ShopNode node_type={createNumberNodeType(1)} cost={10} stored={1}/></li>
+        <li><ShopNode node_type={createArithmeticNodeType("Add", "+", (op1, op2) => op1+op2)} cost={20}/></li>
     </ul>
 </div>
 

@@ -6,7 +6,7 @@ import { Anchor, Node } from "svelvet";
 export let node: PlacedNode;
 </script>
 
-<Node id={node.id} position={node.position} editable={false} let:selected>
+<Node id={node.id} bind:position={node.position} editable={false} let:selected>
     <GenericNode node_type={node.type} {selected}>
         <div id="input-anchor" slot="input_anchor" let:i>
             <!-- Edge label isn't reactive, not sure why -->
