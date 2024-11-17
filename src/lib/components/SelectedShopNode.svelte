@@ -13,6 +13,7 @@ export let nodeMapContainer: HTMLElement;
 {#if $SELECTED_SHOP_NODE}
     <div role="button" tabindex="0" style:left={`${$SELECTED_SHOP_NODE.position.x}px`} style:top={`${$SELECTED_SHOP_NODE.position.y}px`}
          on:mousemove={event => {
+             // TODO: Make this relative to the map
              $SELECTED_SHOP_NODE.position.x = event.clientX;
              $SELECTED_SHOP_NODE.position.y = event.clientY;
          }}

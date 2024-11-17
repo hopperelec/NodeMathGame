@@ -9,7 +9,7 @@ export let node: PlacedNode;
 <Node id={node.id} bind:position={node.position} editable={false} let:selected>
     <GenericNode node_type={node.type} {selected}>
         <div id="input-anchor" slot="input_anchor" let:i>
-            <!-- Edge label isn't reactive, not sure why -->
+            <!-- Edge label isn't reactive, see https://github.com/open-source-labs/Svelvet/issues/522 -->
             <Anchor input id={"I"+i} edgeLabel={node.inputs[+i]?.toString()}>
                 <div></div>
             </Anchor>
