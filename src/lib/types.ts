@@ -18,8 +18,8 @@ export type NodeType<
 	NumOutputs extends number = number,
 > = {
 	name: string;
-	input_names: FixedLengthArray<null | string, NumInputs>;
-	output_names: FixedLengthArray<null | string, NumOutputs>;
+	inputNames: FixedLengthArray<null | string, NumInputs>;
+	outputNames: FixedLengthArray<null | string, NumOutputs>;
 	category: keyof typeof CATEGORY_COLORS;
 	processor: (
 		inputs: FixedLengthArray<ProcessableInputValue, NumInputs>,
@@ -58,16 +58,16 @@ export function createPlacedNode<
 		id: lastNodeId++,
 		type,
 		position,
-		inputs: type.input_names.map(() => null) as Inputs<NumInputs>,
-		outputs: type.output_names.map(() => null) as Outputs<NumOutputs>,
+		inputs: type.inputNames.map(() => null) as Inputs<NumInputs>,
+		outputs: type.outputNames.map(() => null) as Outputs<NumOutputs>,
 	};
 }
 
 export function createNumberNodeType(value: number): NodeType<0, 1> {
 	return {
 		name: value.toString(),
-		input_names: [],
-		output_names: [null],
+		inputNames: [],
+		outputNames: [null],
 		category: "number",
 		processor: () => [value],
 	};
@@ -83,8 +83,8 @@ export function createArithmeticNodeType(
 ): NodeType<2, 1> {
 	return {
 		name,
-		input_names: ["A", "B"],
-		output_names: [`A${symbol}B`],
+		inputNames: ["A", "B"],
+		outputNames: [`A${symbol}B`],
 		category: "arithmetic",
 		processor: ([a, b]) => [processor(a, b)],
 	};
@@ -92,8 +92,8 @@ export function createArithmeticNodeType(
 
 export const SELL_NODE: NodeType<1, 0> = {
 	name: "Sell",
-	input_names: [null],
-	output_names: [],
+	inputNames: [null],
+	outputNames: [],
 	category: "sell",
 	processor: ([input]) => {
 		POINTS_STORE.update((points) => points + input);

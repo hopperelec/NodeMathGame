@@ -10,8 +10,8 @@ let { node = $bindable() }: { node: PlacedNode } = $props();
     <!-- I'm not sure why the type of selected isn't being inferred,
     and I don't think there is a way to ignore the type error -->
     {#snippet children({ selected })}
-        <GenericNode node_type={node.type} {selected}>
-            {#snippet input_anchor({ i })}
+        <GenericNode nodeType={node.type} {selected}>
+            {#snippet inputAnchor({ i })}
                 <div id="input-anchor"  >
                     <!-- Edge label isn't reactive, see https://github.com/open-source-labs/Svelvet/issues/522 -->
                     <Anchor input id={"I"+i} edgeLabel={node.inputs[+i]?.toString()}>
@@ -19,7 +19,7 @@ let { node = $bindable() }: { node: PlacedNode } = $props();
                     </Anchor>
                 </div>
             {/snippet}
-            {#snippet output_anchor({ i })}
+            {#snippet outputAnchor({ i })}
                 <div id="output-anchor"  >
                     <Anchor output id={"O"+i} multiple={false}>
                         <div></div>

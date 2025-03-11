@@ -31,7 +31,7 @@ let {
             SELECTED_SHOP_NODE.set(null);
          }}
     >
-        <UnplacedNode node_type={$SELECTED_SHOP_NODE.node_type}/>
+        <UnplacedNode nodeType={$SELECTED_SHOP_NODE.nodeType}/>
     </div>
 {/if}
 

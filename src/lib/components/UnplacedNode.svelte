@@ -2,14 +2,14 @@
 import GenericNode from "$lib/components/GenericNode.svelte";
 import type { NodeType } from "$lib/types";
 
-let { node_type }: { node_type: NodeType } = $props();
+let { nodeType }: { nodeType: NodeType } = $props();
 </script>
 
-<GenericNode {node_type}>
-    {#snippet input_anchor()}
+<GenericNode {nodeType}>
+    {#snippet inputAnchor()}
         <div id="input-anchor" ></div>
     {/snippet}
-    {#snippet output_anchor()}
+    {#snippet outputAnchor()}
         <div id="output-anchor" ></div>
     {/snippet}
 </GenericNode>

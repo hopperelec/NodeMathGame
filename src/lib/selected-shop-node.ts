@@ -2,7 +2,7 @@ import {type Writable, writable} from "svelte/store";
 import type {NodeType} from "$lib/types";
 
 const SELECTED_SHOP_NODE: Writable<{
-    node_type: NodeType,
+    nodeType: NodeType,
     buy: () => boolean,
     position: { x: number, y: number }
 } | null> = writable(null);

@@ -4,8 +4,8 @@ import type {NodeType} from "$lib/types";
 import SELECTED_SHOP_NODE from "$lib/selected-shop-node";
 import {POINTS_STORE} from "$lib/points";
 
-let { node_type, cost, stored = $bindable(0) }: {
-    node_type: NodeType;
+let { nodeType, cost, stored = $bindable(0) }: {
+    nodeType: NodeType;
     cost: number;
     stored?: number;
 } = $props();
@@ -14,7 +14,7 @@ let usable = $derived(cost < $POINTS_STORE || stored > 0);
 function onMousedown(event: MouseEvent) {
     if (!usable) return;
     SELECTED_SHOP_NODE.set({
-        node_type,
+        nodeType: nodeType,
         buy() {
             if (stored > 0) {
                 stored--;
@@ -30,7 +30,7 @@ function onMousedown(event: MouseEvent) {
 </script>
 
 <button type="button" class:usable onmousedown={onMousedown}>
-    <UnplacedNode {node_type}/>
+    <UnplacedNode {nodeType}/>
     <span>Cost: {cost}</span>
     <span>Stored: {stored}</span>
 </button>

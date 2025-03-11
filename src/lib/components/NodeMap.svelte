@@ -67,7 +67,7 @@ function onDisconnection(event: CustomEvent) {
 setInterval(() => {
 	for (const node of nodes) {
 		if (
-			node.type.output_names.length === 0 &&
+			node.type.outputNames.length === 0 &&
 			node.inputs.every((input) => input !== null)
 		) {
 			node.type.processor(node.inputs);

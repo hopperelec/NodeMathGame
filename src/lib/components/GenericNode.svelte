@@ -3,37 +3,37 @@ import { CATEGORY_COLORS, type NodeType } from "$lib/types";
 import type {Snippet} from "svelte";
 
 let {
-    node_type,
+    nodeType,
     selected = false,
-    input_anchor,
-    output_anchor
+    inputAnchor,
+    outputAnchor
 }: {
-    node_type: NodeType;
+    nodeType: NodeType;
     selected?: boolean;
-    input_anchor: Snippet<[{ i: number }]>;
-    output_anchor: Snippet<[{ i: number }]>;
+    inputAnchor: Snippet<[{ i: number }]>;
+    outputAnchor: Snippet<[{ i: number }]>;
 } = $props();
 </script>
 
-<div id="node-container" class:selected style:--color={CATEGORY_COLORS[node_type.category]}>
-    <h2>{node_type.name}</h2>
+<div id="node-container" class:selected style:--color={CATEGORY_COLORS[nodeType.category]}>
+    <h2>{nodeType.name}</h2>
     <div id="io">
-        {#if node_type.input_names}
+        {#if nodeType.inputNames}
             <ol id="inputs">
-                {#each Object.entries(node_type.input_names) as [i,input_name]}
+                {#each Object.entries(nodeType.inputNames) as [i,inputName]}
                     <li>
-                        {@render input_anchor({ i: +i })}
-                        {#if input_name}<span>{input_name}</span>{/if}
+                        {@render inputAnchor({ i: +i })}
+                        {#if inputName}<span>{inputName}</span>{/if}
                     </li>
                 {/each}
             </ol>
         {/if}
-        {#if node_type.output_names}
+        {#if nodeType.outputNames}
             <ol id="outputs">
-                {#each Object.entries(node_type.output_names) as [i,output_name]}
+                {#each Object.entries(nodeType.outputNames) as [i,outputName]}
                     <li>
-                        {@render output_anchor({ i: +i })}
-                        {#if output_name}<span>{output_name}</span>{/if}
+                        {@render outputAnchor({ i: +i })}
+                        {#if outputName}<span>{outputName}</span>{/if}
                     </li>
                 {/each}
             </ol>

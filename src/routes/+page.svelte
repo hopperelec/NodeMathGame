@@ -32,7 +32,7 @@ let nodeMapContainer: HTMLElement | undefined = $state();
     <span>Points: {$POINTS_STORE}</span>
     <SelectedShopNode onPlace={() => {
         if ($SELECTED_SHOP_NODE === null) throw new Error("No selected node to place");
-        nodes.push(createPlacedNode($SELECTED_SHOP_NODE.node_type, $SELECTED_SHOP_NODE.position));
+        nodes.push(createPlacedNode($SELECTED_SHOP_NODE.nodeType, $SELECTED_SHOP_NODE.position));
         nodes = nodes; // trigger reactivity
     }} {nodeMapContainer}/>
 </div>
