@@ -1,8 +1,18 @@
 <script lang="ts">
 import { CATEGORY_COLORS, type NodeType } from "$lib/types";
+import type {Snippet} from "svelte";
 
-export let node_type: NodeType;
-export let selected = false;
+let {
+    node_type,
+    selected = false,
+    input_anchor,
+    output_anchor
+}: {
+    node_type: NodeType;
+    selected?: boolean;
+    input_anchor: Snippet<[{ i: number }]>;
+    output_anchor: Snippet<[{ i: number }]>;
+} = $props();
 </script>
 
 <div id="node-container" class:selected style:--color={CATEGORY_COLORS[node_type.category]}>
@@ -12,7 +22,7 @@ export let selected = false;
             <ol id="inputs">
                 {#each Object.entries(node_type.input_names) as [i,input_name]}
                     <li>
-                        <slot name="input_anchor" {i}/>
+                        {@render input_anchor({ i: +i })}
                         {#if input_name}<span>{input_name}</span>{/if}
                     </li>
                 {/each}
@@ -22,7 +32,7 @@ export let selected = false;
             <ol id="outputs">
                 {#each Object.entries(node_type.output_names) as [i,output_name]}
                     <li>
-                        <slot name="output_anchor" {i}/>
+                        {@render output_anchor({ i: +i })}
                         {#if output_name}<span>{output_name}</span>{/if}
                     </li>
                 {/each}

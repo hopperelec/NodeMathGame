@@ -4,7 +4,7 @@ import type { PlacedNode, ValidOutputValue } from "$lib/types";
 import { Svelvet } from "svelvet";
 import CustomEdge from "$lib/components/CustomEdge.svelte";
 
-export let nodes: PlacedNode[] = [];
+let { nodes = $bindable([]) }: { nodes?: PlacedNode[] } = $props();
 
 function parseAnchorId(anchorId: { id: string }): number {
 	return +anchorId.id.split("/", 1)[0].substring(3);
@@ -76,8 +76,9 @@ setInterval(() => {
 }, 1000);
 </script>
 
+<!-- Sadly, Svelvet doesn't seem to fully support Svelte 5 yet, so there is not a way to clear the following error -->
 <Svelvet minimap controls pannable theme="dark" edge={CustomEdge} edgesAboveNode on:connection={onConnection} on:disconnection={onDisconnection}>
-    {#each nodes as node}
-        <PlacedNodeComponent {node}/>
+    {#each Object.keys(nodes) as nodeIndex}
+        <PlacedNodeComponent bind:node={nodes[+nodeIndex]}/>
     {/each}
 </Svelvet>

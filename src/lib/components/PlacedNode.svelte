@@ -3,23 +3,31 @@ import GenericNode from "$lib/components/GenericNode.svelte";
 import type { PlacedNode } from "$lib/types";
 import { Anchor, Node } from "svelvet";
 
-export let node: PlacedNode;
+let { node = $bindable() }: { node: PlacedNode } = $props();
 </script>
 
-<Node id={node.id} bind:position={node.position} editable={false} let:selected>
-    <GenericNode node_type={node.type} {selected}>
-        <div id="input-anchor" slot="input_anchor" let:i>
-            <!-- Edge label isn't reactive, see https://github.com/open-source-labs/Svelvet/issues/522 -->
-            <Anchor input id={"I"+i} edgeLabel={node.inputs[+i]?.toString()}>
-                <div></div>
-            </Anchor>
-        </div>
-        <div id="output-anchor" slot="output_anchor" let:i>
-            <Anchor output id={"O"+i} multiple={false}>
-                <div></div>
-            </Anchor>
-        </div>
-    </GenericNode>
+<Node id={node.id} bind:position={node.position} editable={false}>
+    <!-- I'm not sure why the type of selected isn't being inferred,
+    and I don't think there is a way to ignore the type error -->
+    {#snippet children({ selected })}
+        <GenericNode node_type={node.type} {selected}>
+            {#snippet input_anchor({ i })}
+                <div id="input-anchor"  >
+                    <!-- Edge label isn't reactive, see https://github.com/open-source-labs/Svelvet/issues/522 -->
+                    <Anchor input id={"I"+i} edgeLabel={node.inputs[+i]?.toString()}>
+                        <div></div>
+                    </Anchor>
+                </div>
+            {/snippet}
+            {#snippet output_anchor({ i })}
+                <div id="output-anchor"  >
+                    <Anchor output id={"O"+i} multiple={false}>
+                        <div></div>
+                    </Anchor>
+                </div>
+            {/snippet}
+        </GenericNode>
+    {/snippet}
 </Node>
 
 <style>

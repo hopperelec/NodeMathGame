@@ -11,7 +11,7 @@ import Shop from "$lib/components/Shop.svelte";
 import SelectedShopNode from "$lib/components/SelectedShopNode.svelte";
 import SELECTED_SHOP_NODE from "$lib/selected-shop-node";
 
-let nodes: PlacedNode[] = [
+let nodes: PlacedNode[] = $state([
 	createPlacedNode(createNumberNodeType(1), { x: 100, y: 100 }),
     createPlacedNode(createNumberNodeType(1), { x: 100, y: 200 }),
 	createPlacedNode(
@@ -19,18 +19,18 @@ let nodes: PlacedNode[] = [
 		{ x: 300, y: 130 },
 	),
 	createPlacedNode(SELL_NODE, { x: 500, y: 130 }),
-];
+]);
 
-let nodeMapContainer: HTMLElement;
+let nodeMapContainer: HTMLElement | undefined = $state();
 </script>
 
 <div>
     <div bind:this={nodeMapContainer}>
-        <NodeMap {nodes}/>
+        <NodeMap bind:nodes/>
     </div>
     <Shop/>
     <span>Points: {$POINTS_STORE}</span>
-    <SelectedShopNode on:place={() => {
+    <SelectedShopNode onPlace={() => {
         if ($SELECTED_SHOP_NODE === null) throw new Error("No selected node to place");
         nodes.push(createPlacedNode($SELECTED_SHOP_NODE.node_type, $SELECTED_SHOP_NODE.position));
         nodes = nodes; // trigger reactivity
